@@ -12,16 +12,20 @@ jobs:
         name: Checkout
         uses: actions/checkout@v3
 
-      - name: 'Set up JDK 8'
+      -
+        name: 'Set up JDK 8'
         uses: actions/setup-java@v1
         with:
           java-version: 8
 
-      - name: Hive version
+      -
+        name: Hive version
         run: echo "HIVE_VERSION=$(mvn -f "pom.xml" -q help:evaluate -Dexpression=project.version -DforceStdout)" >> $GITHUB_ENV
-      - name: Hadoop version
+      -
+        name: Hadoop version
         run: echo "HADOOP_VERSION=$(mvn -f "$SOURCE_DIR/pom.xml" -q help:evaluate -Dexpression=hadoop.version -DforceStdout)" >> $GITHUB_ENV
-      - name: Tez version
+      -
+        name: Tez version
         run: echo "TEZ_VERSION=$(mvn -f "$SOURCE_DIR/pom.xml" -q help:evaluate -Dexpression=tez.version -DforceStdout)" >> $GITHUB_ENV
 
       -
@@ -34,7 +38,6 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-
 
       - name: Build and push Hive Image to docker hub
         uses: docker/build-push-action@v4
