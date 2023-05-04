@@ -42,6 +42,7 @@ ONBUILD RUN wget https://archive.apache.org/dist/tez/$TEZ_VERSION/apache-tez-$TE
  wget https://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
 ONBUILD RUN mv /apache-tez-$TEZ_VERSION-bin.tar.gz /opt && \
  mv hadoop-$HADOOP_VERSION.tar.gz /opt
+ONBUILD COPY packaging/target/apache-hive-$HIVE_VERSION-bin.tar.gz /opt
 
 
 FROM ${BUILD_ENV} as env

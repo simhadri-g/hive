@@ -20,7 +20,9 @@ jobs:
 
       -
         name: Hive version
-        run: echo "HIVE_VERSION=$(mvn -f "pom.xml" -q help:evaluate -Dexpression=project.version -DforceStdout)" >> $GITHUB_ENV
+        run: |
+            echo "HIVE_VERSION=$(mvn -f "pom.xml" -q help:evaluate -Dexpression=project.version -DforceStdout)" >> $GITHUB_ENV
+            echo tag=${{ env.HIVE_VERSION }} | awk '{print tolower($0)}'
       -
         name: Hadoop version
         run: echo "HADOOP_VERSION=$(mvn -f "pom.xml" -q help:evaluate -Dexpression=hadoop.version -DforceStdout)" >> $GITHUB_ENV
@@ -28,6 +30,9 @@ jobs:
         name: Tez version
         run: echo "TEZ_VERSION=$(mvn -f "pom.xml" -q help:evaluate -Dexpression=tez.version -DforceStdout)" >> $GITHUB_ENV
 
+      - name: Build project
+        run: |
+            mvn clean install -DskipTests -Pitests -Pdist
       -
         name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -45,7 +50,7 @@ jobs:
           context: ./packaging/src/docker/
           file: ./packaging/src/docker/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USER }}/${{ env.HIVE_VERSION }}
+          tags: ${{ secrets.DOCKERHUB_USER }}/${{ env.tag }}
           build-args:
             |
             HIVE_VERSION=${{ env.HIVE_VERSION }}
