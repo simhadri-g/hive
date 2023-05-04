@@ -20,9 +20,12 @@ jobs:
 
       -
         name: Hive version
-        run: |
-            echo "HIVE_VERSION=$(mvn -f "pom.xml" -q help:evaluate -Dexpression=project.version -DforceStdout)" >> $GITHUB_ENV
+        run: echo "HIVE_VERSION=$(mvn -f "pom.xml" -q help:evaluate -Dexpression=project.version -DforceStdout)" >> $GITHUB_ENV
             echo tag=${{ env.HIVE_VERSION }} | awk '{print tolower($0)}'
+
+      - name: Tag
+        run: echo tag=${{ env.HIVE_VERSION }} | awk '{print tolower($0)}' >> $GITHUB_ENV
+
       -
         name: Hadoop version
         run: echo "HADOOP_VERSION=$(mvn -f "pom.xml" -q help:evaluate -Dexpression=hadoop.version -DforceStdout)" >> $GITHUB_ENV
