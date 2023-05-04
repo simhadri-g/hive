@@ -45,10 +45,10 @@ jobs:
           context: ./packaging/src/docker/
           file: ./packaging/src/docker/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USER }}/$HIVE_VERSION
+          tags: ${{ secrets.DOCKERHUB_USER }}/${{ env.HIVE_VERSION }}
           build-args:
             |
-            HIVE_VERSION=$HIVE_VERSION
-            HADOOP_VERSION=$HADOOP_VERSION
-            TEZ_VERSION=$TEZ_VERSION
+            HIVE_VERSION=${{ env.HIVE_VERSION }}
+            HADOOP_VERSION=${{ env.HADOOP_VERSION }}
+            TEZ_VERSION=${{ env.TEZ_VERSION }}
             BUILD_ENV=release
