@@ -53,7 +53,7 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USER }}/${{ env.tag }}
           build-args:
             |
-            HIVE_VERSION=${{ env.HIVE_VERSION }}
+            HIVE_VERSION=4.0.0-alpha-2
             HADOOP_VERSION=${{ env.HADOOP_VERSION }}
             TEZ_VERSION=${{ env.TEZ_VERSION }}
             BUILD_ENV=archive
