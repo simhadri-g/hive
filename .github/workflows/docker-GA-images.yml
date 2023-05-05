@@ -33,9 +33,6 @@ jobs:
         name: Tez version
         run: echo "TEZ_VERSION=$(mvn -f "pom.xml" -q help:evaluate -Dexpression=tez.version -DforceStdout)" >> $GITHUB_ENV
 
-      - name: Build project
-        run: |
-            mvn clean install -DskipTests -Pitests -Pdist
       -
         name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -59,4 +56,4 @@ jobs:
             HIVE_VERSION=${{ env.HIVE_VERSION }}
             HADOOP_VERSION=${{ env.HADOOP_VERSION }}
             TEZ_VERSION=${{ env.TEZ_VERSION }}
-            BUILD_ENV=release
+            BUILD_ENV=archive
