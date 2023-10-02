@@ -1,0 +1,467 @@
+PREHOOK: query: create  table customers_man (customer_id bigint, first_name string) PARTITIONED BY (last_name string) STORED AS orc TBLPROPERTIES ('transactional'='true')
+PREHOOK: type: CREATETABLE
+PREHOOK: Output: database:default
+PREHOOK: Output: default@customers_man
+POSTHOOK: query: create  table customers_man (customer_id bigint, first_name string) PARTITIONED BY (last_name string) STORED AS orc TBLPROPERTIES ('transactional'='true')
+POSTHOOK: type: CREATETABLE
+POSTHOOK: Output: database:default
+POSTHOOK: Output: default@customers_man
+PREHOOK: query: insert into customers_man values(1, "Joanna", "Pierce"),(1, "Sharon", "Taylor"), (2, "Joanna", "Silver"), (2, "Bob", "Silver"), (2, "Susan", "Morrison") ,(2, "Jake", "Donnel") , (3, "Blake", "Burr"), (3, "Trudy", "Johnson"), (3, "Trudy", "Henderson")
+PREHOOK: type: QUERY
+PREHOOK: Input: _dummy_database@_dummy_table
+PREHOOK: Output: default@customers_man
+POSTHOOK: query: insert into customers_man values(1, "Joanna", "Pierce"),(1, "Sharon", "Taylor"), (2, "Joanna", "Silver"), (2, "Bob", "Silver"), (2, "Susan", "Morrison") ,(2, "Jake", "Donnel") , (3, "Blake", "Burr"), (3, "Trudy", "Johnson"), (3, "Trudy", "Henderson")
+POSTHOOK: type: QUERY
+POSTHOOK: Input: _dummy_database@_dummy_table
+POSTHOOK: Output: default@customers_man
+POSTHOOK: Output: default@customers_man@last_name=Burr
+POSTHOOK: Output: default@customers_man@last_name=Donnel
+POSTHOOK: Output: default@customers_man@last_name=Henderson
+POSTHOOK: Output: default@customers_man@last_name=Johnson
+POSTHOOK: Output: default@customers_man@last_name=Morrison
+POSTHOOK: Output: default@customers_man@last_name=Pierce
+POSTHOOK: Output: default@customers_man@last_name=Silver
+POSTHOOK: Output: default@customers_man@last_name=Taylor
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Burr).customer_id SCRIPT []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Burr).first_name SCRIPT []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Donnel).customer_id SCRIPT []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Donnel).first_name SCRIPT []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Henderson).customer_id SCRIPT []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Henderson).first_name SCRIPT []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Johnson).customer_id SCRIPT []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Johnson).first_name SCRIPT []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Morrison).customer_id SCRIPT []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Morrison).first_name SCRIPT []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Pierce).customer_id SCRIPT []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Pierce).first_name SCRIPT []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Silver).customer_id SCRIPT []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Silver).first_name SCRIPT []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Taylor).customer_id SCRIPT []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Taylor).first_name SCRIPT []
+PREHOOK: query: select * from customers_man
+PREHOOK: type: QUERY
+PREHOOK: Input: default@customers_man
+PREHOOK: Input: default@customers_man@last_name=Burr
+PREHOOK: Input: default@customers_man@last_name=Donnel
+PREHOOK: Input: default@customers_man@last_name=Henderson
+PREHOOK: Input: default@customers_man@last_name=Johnson
+PREHOOK: Input: default@customers_man@last_name=Morrison
+PREHOOK: Input: default@customers_man@last_name=Pierce
+PREHOOK: Input: default@customers_man@last_name=Silver
+PREHOOK: Input: default@customers_man@last_name=Taylor
+#### A masked pattern was here ####
+POSTHOOK: query: select * from customers_man
+POSTHOOK: type: QUERY
+POSTHOOK: Input: default@customers_man
+POSTHOOK: Input: default@customers_man@last_name=Burr
+POSTHOOK: Input: default@customers_man@last_name=Donnel
+POSTHOOK: Input: default@customers_man@last_name=Henderson
+POSTHOOK: Input: default@customers_man@last_name=Johnson
+POSTHOOK: Input: default@customers_man@last_name=Morrison
+POSTHOOK: Input: default@customers_man@last_name=Pierce
+POSTHOOK: Input: default@customers_man@last_name=Silver
+POSTHOOK: Input: default@customers_man@last_name=Taylor
+#### A masked pattern was here ####
+3	Blake	Burr
+2	Jake	Donnel
+3	Trudy	Henderson
+3	Trudy	Johnson
+2	Susan	Morrison
+1	Joanna	Pierce
+2	Bob	Silver
+2	Joanna	Silver
+1	Sharon	Taylor
+PREHOOK: query: UPDATE customers_man SET customer_id=22 WHERE last_name='Pierce' OR last_name='Taylor'
+PREHOOK: type: QUERY
+PREHOOK: Input: default@customers_man
+PREHOOK: Input: default@customers_man@last_name=Pierce
+PREHOOK: Input: default@customers_man@last_name=Taylor
+PREHOOK: Output: default@customers_man
+PREHOOK: Output: default@customers_man@last_name=Pierce
+PREHOOK: Output: default@customers_man@last_name=Taylor
+POSTHOOK: query: UPDATE customers_man SET customer_id=22 WHERE last_name='Pierce' OR last_name='Taylor'
+POSTHOOK: type: QUERY
+POSTHOOK: Input: default@customers_man
+POSTHOOK: Input: default@customers_man@last_name=Pierce
+POSTHOOK: Input: default@customers_man@last_name=Taylor
+POSTHOOK: Output: default@customers_man
+POSTHOOK: Output: default@customers_man@last_name=Pierce
+POSTHOOK: Output: default@customers_man@last_name=Pierce
+POSTHOOK: Output: default@customers_man@last_name=Taylor
+POSTHOOK: Output: default@customers_man@last_name=Taylor
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Pierce).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Pierce).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Taylor).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Taylor).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+PREHOOK: query: select * from customers_man
+PREHOOK: type: QUERY
+PREHOOK: Input: default@customers_man
+PREHOOK: Input: default@customers_man@last_name=Burr
+PREHOOK: Input: default@customers_man@last_name=Donnel
+PREHOOK: Input: default@customers_man@last_name=Henderson
+PREHOOK: Input: default@customers_man@last_name=Johnson
+PREHOOK: Input: default@customers_man@last_name=Morrison
+PREHOOK: Input: default@customers_man@last_name=Pierce
+PREHOOK: Input: default@customers_man@last_name=Silver
+PREHOOK: Input: default@customers_man@last_name=Taylor
+#### A masked pattern was here ####
+POSTHOOK: query: select * from customers_man
+POSTHOOK: type: QUERY
+POSTHOOK: Input: default@customers_man
+POSTHOOK: Input: default@customers_man@last_name=Burr
+POSTHOOK: Input: default@customers_man@last_name=Donnel
+POSTHOOK: Input: default@customers_man@last_name=Henderson
+POSTHOOK: Input: default@customers_man@last_name=Johnson
+POSTHOOK: Input: default@customers_man@last_name=Morrison
+POSTHOOK: Input: default@customers_man@last_name=Pierce
+POSTHOOK: Input: default@customers_man@last_name=Silver
+POSTHOOK: Input: default@customers_man@last_name=Taylor
+#### A masked pattern was here ####
+3	Blake	Burr
+2	Jake	Donnel
+3	Trudy	Henderson
+3	Trudy	Johnson
+2	Susan	Morrison
+22	Joanna	Pierce
+2	Bob	Silver
+2	Joanna	Silver
+22	Sharon	Taylor
+PREHOOK: query: UPDATE customers_man SET customer_id=22 WHERE last_name='Pierce' OR 'Taylor'
+PREHOOK: type: QUERY
+PREHOOK: Input: default@customers_man
+PREHOOK: Input: default@customers_man@last_name=Burr
+PREHOOK: Input: default@customers_man@last_name=Donnel
+PREHOOK: Input: default@customers_man@last_name=Henderson
+PREHOOK: Input: default@customers_man@last_name=Johnson
+PREHOOK: Input: default@customers_man@last_name=Morrison
+PREHOOK: Input: default@customers_man@last_name=Pierce
+PREHOOK: Input: default@customers_man@last_name=Silver
+PREHOOK: Input: default@customers_man@last_name=Taylor
+PREHOOK: Output: default@customers_man
+PREHOOK: Output: default@customers_man@last_name=Burr
+PREHOOK: Output: default@customers_man@last_name=Donnel
+PREHOOK: Output: default@customers_man@last_name=Henderson
+PREHOOK: Output: default@customers_man@last_name=Johnson
+PREHOOK: Output: default@customers_man@last_name=Morrison
+PREHOOK: Output: default@customers_man@last_name=Pierce
+PREHOOK: Output: default@customers_man@last_name=Silver
+PREHOOK: Output: default@customers_man@last_name=Taylor
+POSTHOOK: query: UPDATE customers_man SET customer_id=22 WHERE last_name='Pierce' OR 'Taylor'
+POSTHOOK: type: QUERY
+POSTHOOK: Input: default@customers_man
+POSTHOOK: Input: default@customers_man@last_name=Burr
+POSTHOOK: Input: default@customers_man@last_name=Donnel
+POSTHOOK: Input: default@customers_man@last_name=Henderson
+POSTHOOK: Input: default@customers_man@last_name=Johnson
+POSTHOOK: Input: default@customers_man@last_name=Morrison
+POSTHOOK: Input: default@customers_man@last_name=Pierce
+POSTHOOK: Input: default@customers_man@last_name=Silver
+POSTHOOK: Input: default@customers_man@last_name=Taylor
+POSTHOOK: Output: default@customers_man
+POSTHOOK: Output: default@customers_man@last_name=Burr
+POSTHOOK: Output: default@customers_man@last_name=Burr
+POSTHOOK: Output: default@customers_man@last_name=Donnel
+POSTHOOK: Output: default@customers_man@last_name=Donnel
+POSTHOOK: Output: default@customers_man@last_name=Henderson
+POSTHOOK: Output: default@customers_man@last_name=Henderson
+POSTHOOK: Output: default@customers_man@last_name=Johnson
+POSTHOOK: Output: default@customers_man@last_name=Johnson
+POSTHOOK: Output: default@customers_man@last_name=Morrison
+POSTHOOK: Output: default@customers_man@last_name=Morrison
+POSTHOOK: Output: default@customers_man@last_name=Pierce
+POSTHOOK: Output: default@customers_man@last_name=Pierce
+POSTHOOK: Output: default@customers_man@last_name=Silver
+POSTHOOK: Output: default@customers_man@last_name=Silver
+POSTHOOK: Output: default@customers_man@last_name=Taylor
+POSTHOOK: Output: default@customers_man@last_name=Taylor
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Burr).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Burr).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Donnel).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Donnel).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Henderson).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Henderson).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Johnson).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Johnson).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Morrison).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Morrison).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Pierce).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Pierce).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Silver).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Silver).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Taylor).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Taylor).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+PREHOOK: query: select * from customers_man
+PREHOOK: type: QUERY
+PREHOOK: Input: default@customers_man
+PREHOOK: Input: default@customers_man@last_name=Burr
+PREHOOK: Input: default@customers_man@last_name=Donnel
+PREHOOK: Input: default@customers_man@last_name=Henderson
+PREHOOK: Input: default@customers_man@last_name=Johnson
+PREHOOK: Input: default@customers_man@last_name=Morrison
+PREHOOK: Input: default@customers_man@last_name=Pierce
+PREHOOK: Input: default@customers_man@last_name=Silver
+PREHOOK: Input: default@customers_man@last_name=Taylor
+#### A masked pattern was here ####
+POSTHOOK: query: select * from customers_man
+POSTHOOK: type: QUERY
+POSTHOOK: Input: default@customers_man
+POSTHOOK: Input: default@customers_man@last_name=Burr
+POSTHOOK: Input: default@customers_man@last_name=Donnel
+POSTHOOK: Input: default@customers_man@last_name=Henderson
+POSTHOOK: Input: default@customers_man@last_name=Johnson
+POSTHOOK: Input: default@customers_man@last_name=Morrison
+POSTHOOK: Input: default@customers_man@last_name=Pierce
+POSTHOOK: Input: default@customers_man@last_name=Silver
+POSTHOOK: Input: default@customers_man@last_name=Taylor
+#### A masked pattern was here ####
+22	Blake	Burr
+22	Jake	Donnel
+22	Trudy	Henderson
+22	Trudy	Johnson
+22	Susan	Morrison
+22	Joanna	Pierce
+22	Joanna	Silver
+22	Bob	Silver
+22	Sharon	Taylor
+PREHOOK: query: UPDATE customers_man SET customer_id=23 WHERE "anything"
+PREHOOK: type: QUERY
+PREHOOK: Input: default@customers_man
+PREHOOK: Input: default@customers_man@last_name=Burr
+PREHOOK: Input: default@customers_man@last_name=Donnel
+PREHOOK: Input: default@customers_man@last_name=Henderson
+PREHOOK: Input: default@customers_man@last_name=Johnson
+PREHOOK: Input: default@customers_man@last_name=Morrison
+PREHOOK: Input: default@customers_man@last_name=Pierce
+PREHOOK: Input: default@customers_man@last_name=Silver
+PREHOOK: Input: default@customers_man@last_name=Taylor
+PREHOOK: Output: default@customers_man
+PREHOOK: Output: default@customers_man@last_name=Burr
+PREHOOK: Output: default@customers_man@last_name=Donnel
+PREHOOK: Output: default@customers_man@last_name=Henderson
+PREHOOK: Output: default@customers_man@last_name=Johnson
+PREHOOK: Output: default@customers_man@last_name=Morrison
+PREHOOK: Output: default@customers_man@last_name=Pierce
+PREHOOK: Output: default@customers_man@last_name=Silver
+PREHOOK: Output: default@customers_man@last_name=Taylor
+POSTHOOK: query: UPDATE customers_man SET customer_id=23 WHERE "anything"
+POSTHOOK: type: QUERY
+POSTHOOK: Input: default@customers_man
+POSTHOOK: Input: default@customers_man@last_name=Burr
+POSTHOOK: Input: default@customers_man@last_name=Donnel
+POSTHOOK: Input: default@customers_man@last_name=Henderson
+POSTHOOK: Input: default@customers_man@last_name=Johnson
+POSTHOOK: Input: default@customers_man@last_name=Morrison
+POSTHOOK: Input: default@customers_man@last_name=Pierce
+POSTHOOK: Input: default@customers_man@last_name=Silver
+POSTHOOK: Input: default@customers_man@last_name=Taylor
+POSTHOOK: Output: default@customers_man
+POSTHOOK: Output: default@customers_man@last_name=Burr
+POSTHOOK: Output: default@customers_man@last_name=Burr
+POSTHOOK: Output: default@customers_man@last_name=Donnel
+POSTHOOK: Output: default@customers_man@last_name=Donnel
+POSTHOOK: Output: default@customers_man@last_name=Henderson
+POSTHOOK: Output: default@customers_man@last_name=Henderson
+POSTHOOK: Output: default@customers_man@last_name=Johnson
+POSTHOOK: Output: default@customers_man@last_name=Johnson
+POSTHOOK: Output: default@customers_man@last_name=Morrison
+POSTHOOK: Output: default@customers_man@last_name=Morrison
+POSTHOOK: Output: default@customers_man@last_name=Pierce
+POSTHOOK: Output: default@customers_man@last_name=Pierce
+POSTHOOK: Output: default@customers_man@last_name=Silver
+POSTHOOK: Output: default@customers_man@last_name=Silver
+POSTHOOK: Output: default@customers_man@last_name=Taylor
+POSTHOOK: Output: default@customers_man@last_name=Taylor
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Burr).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Burr).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Donnel).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Donnel).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Henderson).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Henderson).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Johnson).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Johnson).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Morrison).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Morrison).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Pierce).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Pierce).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Silver).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Silver).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Taylor).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Taylor).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+PREHOOK: query: select * from customers_man
+PREHOOK: type: QUERY
+PREHOOK: Input: default@customers_man
+PREHOOK: Input: default@customers_man@last_name=Burr
+PREHOOK: Input: default@customers_man@last_name=Donnel
+PREHOOK: Input: default@customers_man@last_name=Henderson
+PREHOOK: Input: default@customers_man@last_name=Johnson
+PREHOOK: Input: default@customers_man@last_name=Morrison
+PREHOOK: Input: default@customers_man@last_name=Pierce
+PREHOOK: Input: default@customers_man@last_name=Silver
+PREHOOK: Input: default@customers_man@last_name=Taylor
+#### A masked pattern was here ####
+POSTHOOK: query: select * from customers_man
+POSTHOOK: type: QUERY
+POSTHOOK: Input: default@customers_man
+POSTHOOK: Input: default@customers_man@last_name=Burr
+POSTHOOK: Input: default@customers_man@last_name=Donnel
+POSTHOOK: Input: default@customers_man@last_name=Henderson
+POSTHOOK: Input: default@customers_man@last_name=Johnson
+POSTHOOK: Input: default@customers_man@last_name=Morrison
+POSTHOOK: Input: default@customers_man@last_name=Pierce
+POSTHOOK: Input: default@customers_man@last_name=Silver
+POSTHOOK: Input: default@customers_man@last_name=Taylor
+#### A masked pattern was here ####
+23	Blake	Burr
+23	Jake	Donnel
+23	Trudy	Henderson
+23	Trudy	Johnson
+23	Susan	Morrison
+23	Joanna	Pierce
+23	Bob	Silver
+23	Joanna	Silver
+23	Sharon	Taylor
+PREHOOK: query: UPDATE customers_man SET customer_id=220 WHERE last_name='Pierce' OR 'Taylor'
+PREHOOK: type: QUERY
+PREHOOK: Input: default@customers_man
+PREHOOK: Input: default@customers_man@last_name=Burr
+PREHOOK: Input: default@customers_man@last_name=Donnel
+PREHOOK: Input: default@customers_man@last_name=Henderson
+PREHOOK: Input: default@customers_man@last_name=Johnson
+PREHOOK: Input: default@customers_man@last_name=Morrison
+PREHOOK: Input: default@customers_man@last_name=Pierce
+PREHOOK: Input: default@customers_man@last_name=Silver
+PREHOOK: Input: default@customers_man@last_name=Taylor
+PREHOOK: Output: default@customers_man
+PREHOOK: Output: default@customers_man@last_name=Burr
+PREHOOK: Output: default@customers_man@last_name=Donnel
+PREHOOK: Output: default@customers_man@last_name=Henderson
+PREHOOK: Output: default@customers_man@last_name=Johnson
+PREHOOK: Output: default@customers_man@last_name=Morrison
+PREHOOK: Output: default@customers_man@last_name=Pierce
+PREHOOK: Output: default@customers_man@last_name=Silver
+PREHOOK: Output: default@customers_man@last_name=Taylor
+POSTHOOK: query: UPDATE customers_man SET customer_id=220 WHERE last_name='Pierce' OR 'Taylor'
+POSTHOOK: type: QUERY
+POSTHOOK: Input: default@customers_man
+POSTHOOK: Input: default@customers_man@last_name=Burr
+POSTHOOK: Input: default@customers_man@last_name=Donnel
+POSTHOOK: Input: default@customers_man@last_name=Henderson
+POSTHOOK: Input: default@customers_man@last_name=Johnson
+POSTHOOK: Input: default@customers_man@last_name=Morrison
+POSTHOOK: Input: default@customers_man@last_name=Pierce
+POSTHOOK: Input: default@customers_man@last_name=Silver
+POSTHOOK: Input: default@customers_man@last_name=Taylor
+POSTHOOK: Output: default@customers_man
+POSTHOOK: Output: default@customers_man@last_name=Burr
+POSTHOOK: Output: default@customers_man@last_name=Burr
+POSTHOOK: Output: default@customers_man@last_name=Donnel
+POSTHOOK: Output: default@customers_man@last_name=Donnel
+POSTHOOK: Output: default@customers_man@last_name=Henderson
+POSTHOOK: Output: default@customers_man@last_name=Henderson
+POSTHOOK: Output: default@customers_man@last_name=Johnson
+POSTHOOK: Output: default@customers_man@last_name=Johnson
+POSTHOOK: Output: default@customers_man@last_name=Morrison
+POSTHOOK: Output: default@customers_man@last_name=Morrison
+POSTHOOK: Output: default@customers_man@last_name=Pierce
+POSTHOOK: Output: default@customers_man@last_name=Pierce
+POSTHOOK: Output: default@customers_man@last_name=Silver
+POSTHOOK: Output: default@customers_man@last_name=Silver
+POSTHOOK: Output: default@customers_man@last_name=Taylor
+POSTHOOK: Output: default@customers_man@last_name=Taylor
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Burr).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Burr).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Donnel).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Donnel).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Henderson).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Henderson).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Johnson).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Johnson).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Morrison).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Morrison).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Pierce).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Pierce).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Silver).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Silver).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Taylor).customer_id EXPRESSION []
+POSTHOOK: Lineage: customers_man PARTITION(last_name=Taylor).first_name SIMPLE [(customers_man)customers_man.FieldSchema(name:first_name, type:string, comment:null), ]
+PREHOOK: query: select * from customers_man
+PREHOOK: type: QUERY
+PREHOOK: Input: default@customers_man
+PREHOOK: Input: default@customers_man@last_name=Burr
+PREHOOK: Input: default@customers_man@last_name=Donnel
+PREHOOK: Input: default@customers_man@last_name=Henderson
+PREHOOK: Input: default@customers_man@last_name=Johnson
+PREHOOK: Input: default@customers_man@last_name=Morrison
+PREHOOK: Input: default@customers_man@last_name=Pierce
+PREHOOK: Input: default@customers_man@last_name=Silver
+PREHOOK: Input: default@customers_man@last_name=Taylor
+#### A masked pattern was here ####
+POSTHOOK: query: select * from customers_man
+POSTHOOK: type: QUERY
+POSTHOOK: Input: default@customers_man
+POSTHOOK: Input: default@customers_man@last_name=Burr
+POSTHOOK: Input: default@customers_man@last_name=Donnel
+POSTHOOK: Input: default@customers_man@last_name=Henderson
+POSTHOOK: Input: default@customers_man@last_name=Johnson
+POSTHOOK: Input: default@customers_man@last_name=Morrison
+POSTHOOK: Input: default@customers_man@last_name=Pierce
+POSTHOOK: Input: default@customers_man@last_name=Silver
+POSTHOOK: Input: default@customers_man@last_name=Taylor
+#### A masked pattern was here ####
+220	Blake	Burr
+220	Jake	Donnel
+220	Trudy	Henderson
+220	Trudy	Johnson
+220	Susan	Morrison
+220	Joanna	Pierce
+220	Joanna	Silver
+220	Bob	Silver
+220	Sharon	Taylor
+PREHOOK: query: DELETE from customers_man WHERE last_name='Pierce' OR 'Taylor'
+PREHOOK: type: QUERY
+PREHOOK: Input: default@customers_man
+PREHOOK: Input: default@customers_man@last_name=Burr
+PREHOOK: Input: default@customers_man@last_name=Donnel
+PREHOOK: Input: default@customers_man@last_name=Henderson
+PREHOOK: Input: default@customers_man@last_name=Johnson
+PREHOOK: Input: default@customers_man@last_name=Morrison
+PREHOOK: Input: default@customers_man@last_name=Pierce
+PREHOOK: Input: default@customers_man@last_name=Silver
+PREHOOK: Input: default@customers_man@last_name=Taylor
+PREHOOK: Output: default@customers_man@last_name=Burr
+PREHOOK: Output: default@customers_man@last_name=Donnel
+PREHOOK: Output: default@customers_man@last_name=Henderson
+PREHOOK: Output: default@customers_man@last_name=Johnson
+PREHOOK: Output: default@customers_man@last_name=Morrison
+PREHOOK: Output: default@customers_man@last_name=Pierce
+PREHOOK: Output: default@customers_man@last_name=Silver
+PREHOOK: Output: default@customers_man@last_name=Taylor
+POSTHOOK: query: DELETE from customers_man WHERE last_name='Pierce' OR 'Taylor'
+POSTHOOK: type: QUERY
+POSTHOOK: Input: default@customers_man
+POSTHOOK: Input: default@customers_man@last_name=Burr
+POSTHOOK: Input: default@customers_man@last_name=Donnel
+POSTHOOK: Input: default@customers_man@last_name=Henderson
+POSTHOOK: Input: default@customers_man@last_name=Johnson
+POSTHOOK: Input: default@customers_man@last_name=Morrison
+POSTHOOK: Input: default@customers_man@last_name=Pierce
+POSTHOOK: Input: default@customers_man@last_name=Silver
+POSTHOOK: Input: default@customers_man@last_name=Taylor
+POSTHOOK: Output: default@customers_man@last_name=Burr
+POSTHOOK: Output: default@customers_man@last_name=Donnel
+POSTHOOK: Output: default@customers_man@last_name=Henderson
+POSTHOOK: Output: default@customers_man@last_name=Johnson
+POSTHOOK: Output: default@customers_man@last_name=Morrison
+POSTHOOK: Output: default@customers_man@last_name=Pierce
+POSTHOOK: Output: default@customers_man@last_name=Silver
+POSTHOOK: Output: default@customers_man@last_name=Taylor
+PREHOOK: query: select count(*) from customers_man
+PREHOOK: type: QUERY
+PREHOOK: Input: default@customers_man
+#### A masked pattern was here ####
+POSTHOOK: query: select count(*) from customers_man
+POSTHOOK: type: QUERY
+POSTHOOK: Input: default@customers_man
+#### A masked pattern was here ####
+0
+hive.cbo.fallback.strategy=NEVER
